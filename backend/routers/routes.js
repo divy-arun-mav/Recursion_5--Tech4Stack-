@@ -42,6 +42,8 @@ router.post('/login', async (req, res) => {
 });
 
 
+// ... (other imports)
+
 router.post('/register', async (req, res) => {
     const { username, email, password } = req.body;
 
@@ -65,10 +67,13 @@ router.post('/register', async (req, res) => {
             password: hashedPassword
         });
 
-        user.save().then(async user => {
+        // Generate and set the token before saving the user
+        user.token = await user.generateToken();
+
+        user.save().then(user => {
             return res.json({
                 message: "Registered Successfully",
-                token: await user.generateToken(),
+                token: user.token, // Use the token generated for the response
                 userId: user._id.toString(),
             });
         })
@@ -81,6 +86,7 @@ router.post('/register', async (req, res) => {
         return res.status(500).json({ error: "Internal server error" });
     }
 });
+
 
 
 router.get('/user', authMiddleware, (req, res) => {

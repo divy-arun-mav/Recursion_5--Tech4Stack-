@@ -71,7 +71,7 @@ export default function Navbar({ user }) {
                 {isLoggedIn ? (
                   <>
                     <div className="btn-txt-grp">
-                      <p className='user-name'>{userData.fullname}</p>
+                      {/* <p className='user-name'>{userData.fullname}</p> */}
                       <button className="btn btn-outline-danger ms-2 fw-semibold" type="button" style={{ maxHeight: "min-content" }} onClick={() => { LogoutUser(); navigate('/login') }}>Logout</button>
                     </div>
                   </>

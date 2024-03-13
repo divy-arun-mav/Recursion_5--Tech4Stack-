@@ -5,7 +5,6 @@ export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
     const [token, setToken] = useState(localStorage.getItem('token'));
-    const [person, setPerson] = useState('Student');
     const [loggedUser, setcurrentUser] = useState('');
     const isLoggedIn = !!token;
 
@@ -66,10 +65,6 @@ export const AuthProvider = ({ children }) => {
         }
     }, [token, loggedUser]);
 
-    const getClassData = useCallback(async () => {
-        
-    },[]);
-
     useEffect(() => {
         const authenticateUser = async () => {
             if (token) {
@@ -82,7 +77,7 @@ export const AuthProvider = ({ children }) => {
 
     return (
         <AuthContext.Provider
-            value={{ isLoggedIn, storeTokenInLS, LogoutUser, token, setPerson, person, backend_api, loggedUser }}
+            value={{ isLoggedIn, storeTokenInLS, LogoutUser, token, backend_api, loggedUser }}
         >
             {children}
         </AuthContext.Provider>

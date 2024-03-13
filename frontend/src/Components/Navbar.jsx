@@ -2,16 +2,13 @@ import React, { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from './store/auth';
 
-export default function Navbar({ user }) {
-  const { isLoggedIn, LogoutUser } = useAuth();
+export default function Navbar() {
+  const { isLoggedIn, LogoutUser,address } = useAuth();
   const navigate = useNavigate();
-
-  const data = localStorage.getItem("USER");
-  const userData = JSON.parse(data);
-
-  useEffect(() => {
-    console.log(userData);
-  }, []);
+  const handleClick = (e) => {
+    e.preventDefault();
+    LogoutUser();
+  }
 
   return (
     <>
@@ -29,58 +26,16 @@ export default function Navbar({ user }) {
                 <li className="nav-item">
                   <Link className="nav-link active" aria-current="page" to='/'>Home</Link>
                 </li>
-                {userData && (
-                  <>
-                    {userData.user === "Student" && (
-                      <>
-                        <li className="nav-item">
-                          <Link className="nav-link active" aria-current="page" to='/attendance'>Attendance</Link>
-                        </li>
-                      </>
-                    )}
-                    {userData.user === "Admin" && (
-                      <>
-                        <li className="nav-item">
-                          <Link className="nav-link active" aria-current="page" to='/manage'>Classrooms</Link>
-                        </li>
-                        <li className="nav-item">
-                          <Link className='nav-link active' style={{ maxHeight: "min-content" }} to='/studentregister'>Register Student</Link>
-                        </li>
-                        <li className="nav-item">
-                          <Link className="nav-link active" type="button" style={{ maxHeight: "min-content" }} to='/teacherregister'>Register Teacher</Link>
-                        </li>
-                      </>
-                    )}
-                    {userData.user === "Teacher" && (
-                      <>
-                        <li className="nav-item">
-                          <Link className="nav-link active" aria-current="page" to='/classroom'>FindClass</Link>
-                        </li>
-                        <li className="nav-item">
-                          <Link className="nav-link active" aria-current="page" to='/assignments'>Connect</Link>
-                        </li>
-                        <li className="nav-item">
-                          <Link className="nav-link active" aria-current="page" to='/tattendance'>Attendance</Link>
-                        </li>
-                      </>
-                    )}
-                  </>
-                )}
               </ul>
               <form className="d-flex fs-6 fw-medium ms-auto navbar-nav">
-                {isLoggedIn ? (
-                  <>
-                    <div className="btn-txt-grp">
-                      {/* <p className='user-name'>{userData.fullname}</p> */}
-                      <button className="btn btn-outline-danger ms-2 fw-semibold" type="button" style={{ maxHeight: "min-content" }} onClick={() => { LogoutUser(); navigate('/login') }}>Logout</button>
-                    </div>
+                {isLoggedIn ? <>
+                  <> <button className="btn btn-outline-success ms-2 fw-semibold" type="submit" onClick={LogoutUser} style={{ maxHeight: "min-content" }} >{address.slice(0, 4) + "..." + address.slice(38)}</button>
+
                   </>
-                ) : (
-                  <>
-                      <button className="btn btn-outline-primary ms-2 fw-semibold" type="button" style={{ maxHeight: "min-content" }} onClick={() => { navigate('/login') }}>Login</button>
-                      <button className="btn btn-outline-primary ms-2 fw-semibold" type="button" style={{ maxHeight: "min-content" }} onClick={() => { navigate('/register') }}>Register</button>
-                  </>
-                )}
+                </> :
+                  <> <button className="btn btn-outline-primary ms-2 fw-semibold" type="submit" style={{ maxHeight: "min-content" }} onClick={() => navigate('/login')}>Login</button>
+                    <button className="btn btn-outline-success ms-2 fw-semibold" type="submit" style={{ maxHeight: "min-content" }} onClick={() => navigate('/register')}>SignUp</button></>
+                }
               </form>
             </div>
           </div>

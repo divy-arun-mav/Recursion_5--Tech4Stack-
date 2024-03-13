@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const User = require("../models/User");
+const User = require("../model/User");
 
 const authMiddleware = async (req, res, next) => {
     const token = req.header('Authorization');
@@ -14,7 +14,7 @@ const authMiddleware = async (req, res, next) => {
     console.log("Token from middleware ", jwtToken);
 
     try {
-        const isVerified = jwt.verify(jwtToken, process.env.JWT_SECRET_KEY);
+        const isVerified = jwt.verify(jwtToken, process.env.JWT_SECRET_KEY || "YOURPRIVATEKEYHERE");
         console.log("Decoded Token: ", isVerified);
 
 

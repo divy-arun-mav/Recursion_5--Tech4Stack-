@@ -1,64 +1,90 @@
-from flask import Flask, render_template
+from flask import Flask, jsonify, send_file
 import pandas as pd
+import numpy as np
 from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
-import numpy as np
+import pickle
+import os
 
 app = Flask(__name__)
 
-# Load your data files
-Monero = pd.read_csv("coin_Monero.csv")
-Ethereum = pd.read_csv("coin_Ethereum.csv")
-WrappedBitcoin = pd.read_csv("coin_WrappedBitcoin.csv")
-Bitcoin = pd.read_csv("coin_Bitcoin.csv")
+# Constants for projection lengths
+projection_Monero = 30
+projection_Ethereum = 30
+projection_Bitcoin = 30
 
-# Function to perform linear regression and return predictions
-def perform_linear_regression(X, y, projection):
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.15)
+# Function to load models
+def load_model(coin):
+    model_path = f'linReg_{coin}.pkl'
+    if os.path.exists(model_path):
+        with open(model_path, 'rb') as file:
+            return pickle.load(file)
+    else:
+        return None
+
+# Load the trained models
+linReg_Monero = load_model('Monero')
+linReg_Ethereum = load_model('Ethereum')
+linReg_WrappedBitcoin = load_model('WrappedBitcoin')
+linReg_Bitcoin = load_model('Bitcoin')
+
+@app.route('/visualize/<coin>')
+def visualize(coin):
+    return f"Visualizing {coin}"
+
+@app.route('/train/<coin>')
+def train(coin):
+    if coin == 'Monero':
+        df = pd.read_csv('coin_Monero.csv')
+    elif coin == 'Ethereum':
+        df = pd.read_csv('coin_Ethereum.csv')
+    elif coin == 'Bitcoin':
+        df = pd.read_csv('coin_Bitcoin.csv')
+    else:
+        return "Invalid coin type"
+
+    # Creation of the independent data set (X) and dependent data set (y)
+    X = np.array(df[['Close']])
+    y = df['Prediction'].values
+
+    # Remove last 'projection' elements for training
+    X_train = X[:-globals()['projection_' + coin]]
+    y_train = y[:-globals()['projection_' + coin]]
+
+    x_train, x_test, y_train, y_test = train_test_split(X_train, y_train, test_size=0.15)
+
+    # Create & train the model
     linReg = LinearRegression()
-    linReg.fit(X_train, y_train)
-    confidence = linReg.score(X_test, y_test)
+    linReg.fit(x_train, y_train)
 
-    x_projection = X[-projection:]
-    predictions = linReg.predict(x_projection)
+    # Save the trained model
+    with open(f'linReg_{coin}.pkl', 'wb') as file:
+        pickle.dump(linReg, file)
 
-    return confidence, predictions
+    linReg_confidence = linReg.score(x_test, y_test)
+    print("Linear Regression Confidence for " + coin + ": ", linReg_confidence)
+    print(linReg_confidence * 100, '%')
 
-@app.route('/')
-def index():
-    # Perform linear regression for each coin
-    projection_Monero = 5
-    confidence_Monero, predictions_Monero = perform_linear_regression(
-        np.array(Monero[['Close']])[:-projection_Monero], Monero['Prediction'].values[:-projection_Monero], projection_Monero
-    )
+    return "Model trained and saved for " + coin
 
-    projection_Ethereum = 5
-    confidence_Ethereum, predictions_Ethereum = perform_linear_regression(
-        np.array(Ethereum[['Close']])[:-projection_Ethereum], Ethereum['Prediction'].values[:-projection_Ethereum], projection_Ethereum
-    )
+@app.route('/predict/<coin>')
+def predict(coin):
+    if coin == 'Monero':
+        df = pd.read_csv('coin_Monero.csv')
+    elif coin == 'Ethereum':
+        df = pd.read_csv('coin_Ethereum.csv')
+    elif coin == 'Bitcoin':
+        df = pd.read_csv('coin_Bitcoin.csv')
+    else:
+        return "Invalid coin type"
 
-    projection_WrappedBitcoin = 5
-    confidence_WrappedBitcoin, predictions_WrappedBitcoin = perform_linear_regression(
-        np.array(WrappedBitcoin[['Close']])[:-projection_WrappedBitcoin], WrappedBitcoin['Prediction'].values[:-projection_WrappedBitcoin], projection_WrappedBitcoin
-    )
-
-    projection_Bitcoin = 5
-    confidence_Bitcoin, predictions_Bitcoin = perform_linear_regression(
-        np.array(Bitcoin[['Close']])[:-projection_Bitcoin], Bitcoin['Prediction'].values[:-projection_Bitcoin], projection_Bitcoin
-    )
-
-    # Render the template with data
-    return render_template(
-        'index.html',
-        confidence_Monero=confidence_Monero,
-        predictions_Monero=predictions_Monero,
-        confidence_Ethereum=confidence_Ethereum,
-        predictions_Ethereum=predictions_Ethereum,
-        confidence_WrappedBitcoin=confidence_WrappedBitcoin,
-        predictions_WrappedBitcoin=predictions_WrappedBitcoin,
-        confidence_Bitcoin=confidence_Bitcoin,
-        predictions_Bitcoin=predictions_Bitcoin
-    )
+    x_projection = np.array(df[['Close']])[-globals()['projection_' + coin]:]
+    linReg = load_model(coin)
+    if linReg:
+        linReg_prediction = linReg.predict(x_projection)
+        return str(linReg_prediction[0])
+    else:
+        return "Model not found for " + coin
 
 if __name__ == '__main__':
     app.run(debug=True)

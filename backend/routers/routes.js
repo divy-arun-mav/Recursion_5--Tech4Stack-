@@ -24,8 +24,9 @@ router.post('/login', async (req, res) => {
         const isMatch = await bcrypt.compare(password, user.password);
 
         if (isMatch) {
-            const secretKey = 'yourDefaultSecretKey';
+            const secretKey = process.env.JWT_SECRET_KEY || 'YOURPRIVATEKEYHERE';
             const token = jwt.sign({ _id: user.id }, secretKey);
+            console.log("Login:",token)
 
             return res.status(200).json({
                 message: "Login successful",

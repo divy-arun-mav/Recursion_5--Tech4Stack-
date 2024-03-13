@@ -89,7 +89,6 @@ export const AuthProvider = ({ children }) => {
                 await userAuthentication();
             }
         };
-        connectWallet();
         authenticateUser();
     }, [token, userAuthentication]);
 

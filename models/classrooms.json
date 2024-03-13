@@ -1,0 +1,222 @@
+[
+  {
+    "_id": {
+      "$oid": "65dac3eae8cc75af435e1892"
+    },
+    "classroom_no": "Room 22A",
+    "faculty_name": "John Doe",
+    "strength": 26,
+    "facility": "lab",
+    "isReserved": true,
+    "isLab": false
+  },
+  {
+    "_id": {
+      "$oid": "65dac3eae8cc75af435e1893"
+    },
+    "classroom_no": "Room 22B",
+    "faculty_name": "Jane Smith",
+    "strength": 30,
+    "facility": "pc",
+    "isReserved": true,
+    "isLab": false
+  },
+  {
+    "_id": {
+      "$oid": "65dac3eae8cc75af435e1894"
+    },
+    "classroom_no": "Room 23",
+    "faculty_name": "Robert Johnson",
+    "strength": 15,
+    "facility": "smartboard",
+    "isReserved": true,
+    "isLab": false
+  },
+  {
+    "_id": {
+      "$oid": "65dac3eae8cc75af435e1895"
+    },
+    "classroom_no": "Room 24",
+    "faculty_name": "Samantha Davis",
+    "strength": 22,
+    "facility": "projector",
+    "isReserved": true,
+    "isLab": false
+  },
+  {
+    "_id": {
+      "$oid": "65dac3eae8cc75af435e1896"
+    },
+    "classroom_no": "Room 25",
+    "faculty_name": "Michael Brown",
+    "strength": 18,
+    "facility": "lab",
+    "isReserved": true,
+    "isLab": false
+  },
+  {
+    "_id": {
+      "$oid": "65dac3eae8cc75af435e1897"
+    },
+    "classroom_no": "Room 26",
+    "faculty_name": "Emily White",
+    "strength": 27,
+    "facility": "pc",
+    "isReserved": false,
+    "isLab": false
+  },
+  {
+    "_id": {
+      "$oid": "65dac3eae8cc75af435e1898"
+    },
+    "classroom_no": "Room 27",
+    "faculty_name": "Daniel Miller",
+    "strength": 19,
+    "facility": "Projector",
+    "isReserved": false,
+    "isLab": false
+  },
+  {
+    "_id": {
+      "$oid": "65dac3eae8cc75af435e1899"
+    },
+    "classroom_no": "Room 28",
+    "faculty_name": "Olivia Taylor",
+    "strength": 16,
+    "facility": "projector",
+    "isReserved": false,
+    "isLab": false
+  },
+  {
+    "_id": {
+      "$oid": "65dac3eae8cc75af435e189a"
+    },
+    "classroom_no": "Room 29",
+    "faculty_name": "Christopher Martinez",
+    "strength": 32,
+    "facility": "lab",
+    "isReserved": true,
+    "isLab": false
+  },
+  {
+    "_id": {
+      "$oid": "65dac3eae8cc75af435e189b"
+    },
+    "classroom_no": "Room 30",
+    "faculty_name": "Sophia Anderson",
+    "strength": 28,
+    "facility": "pc",
+    "isReserved": true,
+    "isLab": false
+  },
+  {
+    "_id": {
+      "$oid": "65dac3eae8cc75af435e189c"
+    },
+    "classroom_no": "Room 31",
+    "faculty_name": "William Garcia",
+    "strength": 14,
+    "facility": "smartboard",
+    "isReserved": false,
+    "isLab": false
+  },
+  {
+    "_id": {
+      "$oid": "65dac3eae8cc75af435e189d"
+    },
+    "classroom_no": "Room 32",
+    "faculty_name": "Ella Wilson",
+    "strength": 19,
+    "facility": "projector",
+    "isReserved": false,
+    "isLab": false
+  },
+  {
+    "_id": {
+      "$oid": "65dac3eae8cc75af435e189e"
+    },
+    "classroom_no": "Room 33",
+    "faculty_name": "James Thomas",
+    "strength": 26,
+    "facility": "lab",
+    "isReserved": false,
+    "isLab": false
+  },
+  {
+    "_id": {
+      "$oid": "65dac3eae8cc75af435e189f"
+    },
+    "classroom_no": "Room 34",
+    "faculty_name": "Ava Clark",
+    "strength": 21,
+    "facility": "pc",
+    "isReserved": false,
+    "isLab": false
+  },
+  {
+    "_id": {
+      "$oid": "65dac3eae8cc75af435e18a0"
+    },
+    "classroom_no": "Room 35",
+    "faculty_name": "Logan Turner",
+    "strength": 17,
+    "facility": "smartboard",
+    "isReserved": false,
+    "isLab": false
+  },
+  {
+    "_id": {
+      "$oid": "65dac3eae8cc75af435e18a1"
+    },
+    "classroom_no": "Room 36",
+    "faculty_name": "Grace Baker",
+    "strength": 23,
+    "facility": "projector",
+    "isReserved": false,
+    "isLab": false
+  },
+  {
+    "_id": {
+      "$oid": "65dac3eae8cc75af435e18a2"
+    },
+    "classroom_no": "Room 37",
+    "faculty_name": "Liam Adams",
+    "strength": 31,
+    "facility": "lab",
+    "isReserved": true,
+    "isLab": false
+  },
+  {
+    "_id": {
+      "$oid": "65dac3eae8cc75af435e18a3"
+    },
+    "classroom_no": "Room 38",
+    "faculty_name": "Zoe Cooper",
+    "strength": 29,
+    "facility": "pc",
+    "isReserved": false,
+    "isLab": false
+  },
+  {
+    "_id": {
+      "$oid": "65dac3eae8cc75af435e18a4"
+    },
+    "classroom_no": "Room 39",
+    "faculty_name": "Mason Moore",
+    "strength": 13,
+    "facility": "smartboard",
+    "isReserved": false,
+    "isLab": false
+  },
+  {
+    "_id": {
+      "$oid": "65dac3eae8cc75af435e18a5"
+    },
+    "classroom_no": "Room 40",
+    "faculty_name": "Aria Turner",
+    "strength": 24,
+    "facility": "projector",
+    "isReserved": false,
+    "isLab": false
+  }
+]

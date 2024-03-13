@@ -1,0 +1,14 @@
+{
+    "type": "service_account",
+    "project_id": "glowing-harmony-411318",
+    "private_key_id": "4a0935e1dcc99db04307b71590d34eb920494f13",
+    "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQDPcW4kEaKucFBm\nt3son+f2sNmFnmnQ112I0guRWgQtNOyqmfjPFTTt9ZgI1mGP3X84qPnKZBtxld1g\n9WQxvzARWdjXBioUQcAom+FO9tyMN4WRyTK0mDuK76N0looVExMWsISk3DJgHyf1\nAwsPQJEx57vSMcfLqALbsrBxUO3mHuwRiL/ZHMXG6z+omWuhZTl6Uks0JHE5myzI\nuiyPiYFWsR4oaRXvEopuYKfq/DIi90s0LlXddkShBrD3c8vk9kiAkGr1/R926nnS\nvD839AKIHHH2qVtWzm5iwJHWfVpjHWToOHdDBYtIiBU8gvRSMVwJTaDGk7nXkX7j\nwjUdSq+RAgMBAAECggEABQgEq4aeghaaFSbltAJW/+Hdh/QOhRlVMiqr5QVX96ft\nKH7tAAYiYnHMiu8hP9f1qAnz0UrrFZ22th5y4KtW53PDaxZbhXMwZzZoqjlM1ZKW\noo9MxM1/XDXGzKuTYSBocWHWxcNDVLldy1TpoWybA5faZq7Jefdh1ZCQAP10pHxc\nKmO7/fpXvsXGvSG+GIcMXc81s+ajfvx6iJdT1G5F5P+wCrqvwS6tlXtbjYfSpDhZ\nmUVgcRN/bT4d9DNrHDc/gw8PyJeIqMFJhdKmuQ5eknHhXoAgnEAlEMbmc8kx9+qg\n2+YHLrdhbUnTwDx4O8Jx957DOczYx7UX/3qLC7kAJQKBgQD5ow3R8k1kOSsHLoUH\nyNhL1sSwK6Algc8squjI9wc+pqLnbmC4HdCUhWtcgb9HsVO/cbTjmuDqTi2iPyrw\nIBk4XsUsqKyglG0P4QI/5UPSTbIMqmxOSXB27+9iDJLYUG8WfsdKSgO42jgmwQkn\ni2Ejzp0I6MRrFIc9wSSwCIYsywKBgQDUuwzpREOLl3K8ZQAwgGCXWQr5HRke2Cw3\nTbzV0le7oJuk+zIb2XoTu5qrZUIrr2Yd+LBhMM1XBri375sIFd6T68fi+dvqtj2z\nAztdQ6yFxwzEhAiKWD4ia2HJXcQsiRlFcpYu98y/dVuQZTcBUX1Bsw0S0hsJyN55\nTe0+Jz0FkwKBgE9+8zm2VZri8abZ05dFCEwuWnhXjColiloJGxRURkRXQG0+oyI+\nrFt/mU7eKpGkEK1YgmgwvAshVjrirsPFFQL0ewnbtQ119r0lxFegpNZl05tg8hiE\nHoJhqfOpWWH1S0r4mHI527GUHGmK82VaZ1bFxxA9P79xzBeIWCyOqlu9AoGASMVw\nBkAe5xq42i+m3/CamkuQkGVe2YlTntuN9ItPDdVESSzRGGvN8gAkSeuKtkz7Htea\n5rR+Gf4npGxn2V051do7d67Hh0QuWRWK8j2bP+w2tub/0Ouc3cNkITFdUWrY5UPs\nkkacmQY5e2zUYzQQKDBrEXwkWbWIPXDl7nQX0NcCgYAWuQIeYq7lezkZiHpp5qW+\n16RjxZ9QeF05w5THalwLH6TM4bILIrIn63+5ortr0nDLpHvqTXnqysUkR86DmfVs\ny4pcBGEzYZuNM1xzfme2hPqZByvuuiJ0lpNnJJOapr2zzKFXCglTlui1O5pLZYTJ\nclRfmhZ1N9+UdJ7faJlqQQ==\n-----END PRIVATE KEY-----\n",
+    "client_email": "firebase-adminsdk-2o6a4@glowing-harmony-411318.iam.gserviceaccount.com",
+    "client_id": "118401584802818011961",
+    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+    "token_uri": "https://oauth2.googleapis.com/token",
+    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+    "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-2o6a4%40glowing-harmony-411318.iam.gserviceaccount.com",
+    "universe_domain": "googleapis.com"
+  }
+  

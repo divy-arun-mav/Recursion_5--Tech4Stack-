@@ -9,6 +9,7 @@ const authMiddleware = require('../middleware/authMiddleware')
 
 router.post('/login', async (req, res) => {
     const { email, password } = req.body;
+    const deviceToken = req.query.deviceToken;
 
     if (!email || !password) {
         return res.status(422).json({ error: "Please provide a valid email and password" });
@@ -24,9 +25,12 @@ router.post('/login', async (req, res) => {
         const isMatch = await bcrypt.compare(password, user.password);
 
         if (isMatch) {
+            const user = await User.findOne({ email });
+            user.ntoken = deviceToken;
+            await user.save();
+
             const secretKey = process.env.JWT_SECRET_KEY || 'YOURPRIVATEKEYHERE';
             const token = jwt.sign({ _id: user.id }, secretKey);
-            console.log("Login:",token)
 
             return res.status(200).json({
                 message: "Login successful",

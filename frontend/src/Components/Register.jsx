@@ -11,19 +11,12 @@ const Register = () => {
     const [password, setPassword] = useState("");
     const [mail, setMail] = useState("");
 
-    const passRege = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         if (!username || !password || !mail) {
             return alert("All Fields Are Required!!!");
         }
-
-        else if (!passRege.test(password)) {
-            alert("Password must contain atleast 8 characters, including atleast 1 number and 1 includes both lower and uppercase letters and special characters for example #,?!");
-            return;
-        }
-
         try {
             const response = await fetch("http://localhost:8000/register", {
                 method: "post",

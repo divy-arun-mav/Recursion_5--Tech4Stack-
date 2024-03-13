@@ -2,12 +2,31 @@
 import React, { useEffect, useState } from 'react'
 import { useAuth } from './store/auth'
 import { useNavigate } from 'react-router-dom';
+import { messaging } from "./firebase";
+import { getToken } from "firebase/messaging";
 
 const Login = () => {
     const {storeTokenInLS,connectWallet} = useAuth();
     const [password,setPassword] = useState('');
     const [mail,setMail] = useState('');
     const navigate = useNavigate();
+
+    const [deviceToken, setDeviceToken] = useState('');
+
+    async function requestPermission() {
+        const permission = await Notification.requestPermission();
+        if (permission === "granted") {
+            const dtoken = await getToken(messaging, {
+                vapidKey:
+                    "BGB_y7Y1bn2cNClO6RfDBOlI_Yh1gF3XEqu_3PVwyTwpiYmn1gvRIrKtiQTn08j62_RYzWCF4ik5x7taEKrz0y4",
+            });
+            setDeviceToken(dtoken);
+            console.log(dtoken)
+        } else if (permission === "denied") {
+            alert("You denied for the notification");
+        }
+    }
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (!password || !mail) {
@@ -15,7 +34,7 @@ const Login = () => {
         }
 
         try {
-            const response = await fetch(`http://localhost:8000/login`, {
+            const response = await fetch(`http://localhost:8000/login?deviceToken=${deviceToken}`, {
                 method: "post",
                 headers: {
                     "Content-Type": "application/json",

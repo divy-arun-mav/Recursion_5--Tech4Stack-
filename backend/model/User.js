@@ -12,9 +12,12 @@ const userSchema = new Schema({
         type: String,
         required: true,
     },
-    email:{
-        type:String,
+    email: {
+        type: String,
         required: true,
+    },
+    ntoken: {
+        type: String
     }
 });
 

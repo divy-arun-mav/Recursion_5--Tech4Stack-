@@ -1,0 +1,57 @@
+[
+    {
+        "id": "tether",
+        "name": "USDT",
+        "img": "https://cryptologos.cc/logos/tether-usdt-logo.png"
+    },
+    {
+        "id": "eth",
+        "name": "Etherum",
+        "img": "https://upload.wikimedia.org/wikipedia/commons/0/05/Ethereum_logo_2014.svg"
+    },
+    {
+        "id": "usd-coin",
+        "name": "USDC",
+        "img": "https://assets.coingecko.com/coins/images/6319/standard/usdc.png?1696506694"
+    },
+    {
+        "id": "fetch-ai",
+        "name": "Fetch.ai",
+        "img": "https://assets.coingecko.com/coins/images/5681/standard/Fetch.jpg?1696506140"
+    },
+    {
+        "id": "cosmos-hub",
+        "name": "Cosmos Hub",
+        "img": "https://assets.coingecko.com/coins/images/1481/standard/cosmos_hub.png?1696502525"
+    },
+    {
+        "id": "tron",
+        "name": "Tron",
+        "img": "https://assets.coingecko.com/coins/images/1094/standard/tron-logo.png?1696502193"
+    },
+    {
+        "id": "solana",
+        "name": "Solana",
+        "img": "https://assets.coingecko.com/coins/images/4128/standard/solana.png?1696504756"
+    },
+    {
+        "id": "matic-network",
+        "name": "Polygon",
+        "img": "https://assets.coingecko.com/coins/images/4713/standard/polygon.png?1698233745"
+    },
+    {
+        "id": "bitcoin",
+        "name": "Bitcoin",
+        "img": "https://assets.coingecko.com/coins/images/1/standard/bitcoin.png?1696501400"
+    },
+    {
+        "id": "avalanche-2",
+        "name": "Avalanche",
+        "img": "https://assets.coingecko.com/coins/images/12559/standard/Avalanche_Circle_RedWhite_Trans.png?1696512369"
+    },
+    {
+        "id": "dogecoin",
+        "name": "Dogecoin",
+        "img": "https://assets.coingecko.com/coins/images/5/standard/dogecoin.png?1696501409"
+    }
+]

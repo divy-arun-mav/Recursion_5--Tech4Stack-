@@ -73,12 +73,12 @@ router.post('/register', async (req, res) => {
         });
 
         // Generate and set the token before saving the user
-        user.token = await user.generateToken();
+        user.ntoken = await user.generateToken();
 
         user.save().then(user => {
             return res.json({
                 message: "Registered Successfully",
-                token: user.token, // Use the token generated for the response
+                token: user.ntoken, // Use the token generated for the response
                 userId: user._id.toString(),
             });
         })

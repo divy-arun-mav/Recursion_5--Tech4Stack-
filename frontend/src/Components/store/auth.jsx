@@ -1,12 +1,14 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 // import { ethers } from "ethers";
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
 
     const [address, setAddress] = useState(null);
+    const [token,setToken] = useState('');
+    const [user,setUser] = useState('');
+    let isLoggedIn = !!token;
 
-    const [isloggedin, setIsloggedIn] = useState(false);
     const connectWallet = async () => {
         try {
             const { ethereum } = window;
@@ -32,9 +34,68 @@ export const AuthProvider = ({ children }) => {
         }
     }
 
-   
+    useEffect(() => {
+        const ls = localStorage.getItem("USER");
+        if (ls) {
+            const parsedUser = JSON.parse(ls);
+            setUser(parsedUser);
+        } else {
+            console.log("Please Login First");
+        }
+    }, []);
+
+
+    const storeTokenInLS = (serverToken) => {
+        setToken(serverToken);
+        localStorage.setItem("token", serverToken);
+    };
+
+    const LogoutUser = () => {
+        setToken("");
+        localStorage.removeItem("token");
+        localStorage.removeItem("USER");
+    }
+
+    const userAuthentication = async () => {
+        let response;
+        try {
+            response = await fetch("http://localhost:8000/user", {
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+
+            if (response.status !== 200) {
+                console.error("Server returned an error:", response.status, response.statusText);
+            }
+
+            const data = await response.json();
+
+            if (data.msg) {
+                localStorage.setItem("USER", JSON.stringify(data.msg));
+            } else {
+                console.error("Unexpected API response format:", data);
+            }
+        } catch (error) {
+            console.error("Error during user authentication:", error);
+        }
+    };
+
+
+    useEffect(() => {
+        const authenticateUser = async () => {
+            if (token) {
+                await userAuthentication();
+            }
+        };
+        connectWallet();
+        authenticateUser();
+    }, [token, userAuthentication]);
+
+
     return (
-        <AuthContext.Provider value={{ address, connectWallet, isloggedin,setIsloggedIn}}>
+        <AuthContext.Provider value={{ address, connectWallet, isLoggedIn,LogoutUser,storeTokenInLS }}>
             {children}
         </AuthContext.Provider>
     );

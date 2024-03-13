@@ -1,0 +1,217 @@
+import pandas as pd
+import numpy as np
+
+from sklearn.linear_model import LinearRegression
+from sklearn.model_selection import train_test_split
+
+import matplotlib.pyplot as plt
+from itertools import cycle
+import plotly.graph_objects as go
+import plotly.express as px
+from plotly.subplots import make_subplots
+
+Monero = pd.read_csv("coin_Monero.csv")
+Monero
+
+Ethereum = pd.read_csv("coin_Ethereum.csv")
+Ethereum
+
+WrappedBitcoin = pd.read_csv("coin_WrappedBitcoin.csv")
+WrappedBitcoin
+
+Bitcoin = pd.read_csv("coin_Bitcoin.csv")
+Bitcoin
+
+################################################### Monero #############################################################
+#Creation of a variable for predicting '5' days out into the future
+projection_Monero = 5
+#creation of a new column with a name prediction
+Monero['Prediction'] = Monero[['Close']].shift(-projection_Monero)
+Monero
+
+################################################### Ethereum #############################################################
+#Creation of a variable for predicting '5' days out into the future
+projection_Ethereum = 5
+#creation of a new column with a name prediction
+Ethereum['Prediction'] = Ethereum[['Close']].shift(-projection_Ethereum)
+Ethereum
+
+################################################### WrappedBitcoin #############################################################
+#Creation of a variable for predicting '5' days out into the future
+projection_WrappedBitcoin = 5
+#creation of a new column with a name prediction
+WrappedBitcoin['Prediction'] = WrappedBitcoin[['Close']].shift(-projection_WrappedBitcoin)
+WrappedBitcoin
+
+################################################### Bitcoin #############################################################
+#Creation of a variable for predicting '5' days out into the future
+projection_Bitcoin = 5
+#creation of a new column with a name prediction
+Bitcoin['Prediction'] = Bitcoin[['Close']].shift(-projection_Bitcoin)
+Bitcoin
+
+################################################### Monero #############################################################
+visualize_Monero = cycle(['Open','Close','High','Low','Prediction'])
+
+fig = px.line(Monero, x=Monero.Date, y=[Monero['Open'], Monero['Close'], 
+                                          Monero['High'], Monero['Low'], Monero['Prediction']],
+             labels={'Date': 'Date','value':'Price'})
+fig.update_layout(title_text='Monero', font_size=15, font_color='black',legend_title_text='Parameters')
+fig.for_each_trace(lambda t:  t.update(name = next(visualize_Monero)))
+fig.update_xaxes(showgrid=False)
+fig.update_yaxes(showgrid=False)
+
+fig.show()
+
+################################################### Ethereum #############################################################
+visualize_Ethereum = cycle(['Open','Close','High','Low','Prediction'])
+
+fig = px.line(Ethereum, x=Ethereum.Date, y=[Ethereum['Open'], Ethereum['Close'], 
+                                          Ethereum['High'], Ethereum['Low'],Ethereum['Prediction']],
+             labels={'Date': 'Date','value':'Price'})
+fig.update_layout(title_text='Ethereum', font_size=15, font_color='black',legend_title_text='Parameters')
+fig.for_each_trace(lambda t:  t.update(name = next(visualize_Ethereum)))
+fig.update_xaxes(showgrid=False)
+fig.update_yaxes(showgrid=False)
+
+fig.show()
+
+################################################### Bitcoin #############################################################
+visualize_Bitcoin = cycle(['Open','Close','High','Low','Prediction'])
+
+fig = px.line(Bitcoin, x=Bitcoin.Date, y=[Bitcoin['Open'], Bitcoin['Close'], 
+                                          Bitcoin['High'], Bitcoin['Low'],Bitcoin['Prediction']],
+             labels={'Date': 'Date','value':'Price'})
+fig.update_layout(title_text='Bitcoin', font_size=15, font_color='black',legend_title_text='Parameters')
+fig.for_each_trace(lambda t:  t.update(name = next(visualize_Bitcoin)))
+fig.update_xaxes(showgrid=False)
+fig.update_yaxes(showgrid=False)
+
+fig.show()
+
+################################################### Monero ##############################################################Creation of the independent data set (X)
+X_Monero = np.array(Monero[['Close']])
+X_Monero = X_Monero[:-projection_Monero]
+print(X_Monero)
+
+#creation of the dependent data set (y)
+y_Monero = Monero['Prediction'].values
+y_Monero = y_Monero[:-projection_Monero]
+print(y_Monero)
+
+################################################### Ethereum #############################################################
+
+#Creation of the independent data set (X)
+X_Ethereum = np.array(Ethereum[['Close']])
+X_Ethereum = X_Ethereum[:-projection_Ethereum]
+print(X_Ethereum)
+
+#creation of the dependent data set (y)
+y_Ethereum = Ethereum['Prediction'].values
+y_Ethereum = y_Ethereum[:-projection_Ethereum]
+print(y_Ethereum)
+
+################################################### WrappedBitcoin #############################################################
+
+#Creation of the independent data set (X)
+X_WrappedBitcoin = np.array(WrappedBitcoin[['Close']])
+X_WrappedBitcoin = X_WrappedBitcoin[:-projection_WrappedBitcoin]
+print(X_WrappedBitcoin)
+
+#creation of the dependent data set (y)
+y_WrappedBitcoin = WrappedBitcoin['Prediction'].values
+y_WrappedBitcoin = y_WrappedBitcoin[:-projection_WrappedBitcoin]
+print(y_WrappedBitcoin)
+
+################################################### Bitcoin #############################################################
+
+#Creation of the independent data set (X)
+X_Bitcoin = np.array(Bitcoin[['Close']])
+X_Bitcoin = X_Bitcoin[:-projection_Bitcoin]
+print(X_Bitcoin)
+
+#creation of the dependent data set (y)
+y_Bitcoin = Bitcoin['Prediction'].values
+y_Bitcoin = y_Bitcoin[:-projection_Bitcoin]
+print(y_Bitcoin)
+
+################################################### Monero #############################################################
+x_train_Monero, x_test_Monero, y_train_Monero, y_test_Monero = train_test_split(X_Monero,y_Monero,test_size=0.15)
+
+################################################### Ethereum #############################################################
+x_train_Ethereum, x_test_Ethereum, y_train_Ethereum, y_test_Ethereum = train_test_split(X_Ethereum,y_Ethereum,test_size=0.15)
+
+################################################### WrappedBitcoin #############################################################
+x_train_WrappedBitcoin, x_test_WrappedBitcoin, y_train_WrappedBitcoin, y_test_WrappedBitcoin = train_test_split(X_WrappedBitcoin,y_WrappedBitcoin,test_size=0.15)
+
+################################################### Bitcoin #############################################################
+x_train_Bitcoin, x_test_Bitcoin, y_train_Bitcoin, y_test_Bitcoin = train_test_split(X_Bitcoin,y_Bitcoin,test_size=0.15)
+
+################################################### Monero #############################################################
+#create & train the model
+linReg_Monero = LinearRegression()
+linReg_Monero.fit(x_train_Monero,y_train_Monero)
+
+################################################### Ethereum #############################################################
+linReg_Ethereum = LinearRegression()
+linReg_Ethereum.fit(x_train_Ethereum,y_train_Ethereum)
+
+################################################### WrappedBitcoin #############################################################
+linReg_WrappedBitcoin = LinearRegression()
+linReg_WrappedBitcoin.fit(x_train_WrappedBitcoin,y_train_WrappedBitcoin)
+
+################################################### Bitcoin #############################################################
+linReg_Bitcoin = LinearRegression()
+linReg_Bitcoin.fit(x_train_Bitcoin,y_train_Bitcoin)
+
+################################################### Monero #############################################################
+linReg_confidence_Monero = linReg_Monero.score(x_test_Monero,y_test_Monero)
+print("Linear Regression Confidence for Monero: ",linReg_confidence_Monero)
+print(linReg_confidence_Monero*100,'%')
+
+################################################### Ethereum #############################################################
+linReg_confidence_Ethereum = linReg_Ethereum.score(x_test_Ethereum,y_test_Ethereum)
+print("Linear Regression Confidence for Ethereum: ",linReg_confidence_Ethereum)
+print(linReg_confidence_Ethereum*100,'%')
+
+################################################### WrappedBitcoin #############################################################
+linReg_confidence_WrappedBitcoin = linReg_WrappedBitcoin.score(x_test_WrappedBitcoin,y_test_WrappedBitcoin)
+print("Linear Regression Confidence for WrappedBitcoin: ",linReg_confidence_WrappedBitcoin)
+print(linReg_confidence_WrappedBitcoin*100,'%')
+
+################################################### Bitcoin #############################################################
+linReg_confidence_Bitcoin = linReg_Bitcoin.score(x_test_Bitcoin,y_test_Bitcoin)
+print("Linear Regression Confidence for Bitcoin: ",linReg_confidence_Bitcoin)
+print(linReg_confidence_Bitcoin*100,'%')
+
+################################################### Monero #############################################################
+
+x_projection_Monero = np.array(Monero[['Close']])[-projection_Monero:]
+print(x_projection_Monero)
+
+linReg_prediction_Monero = linReg_Monero.predict(x_projection_Monero)
+print(linReg_prediction_Monero)
+
+################################################### Ethereum #############################################################
+
+x_projection_Ethereum = np.array(Ethereum[['Close']])[-projection_Ethereum:]
+print(x_projection_Ethereum)
+
+linReg_prediction_Ethereum = linReg_Ethereum.predict(x_projection_Ethereum)
+print(linReg_prediction_Ethereum)
+
+################################################### WrappedBitcoin #############################################################
+
+x_projection_WrappedBitcoin = np.array(WrappedBitcoin[['Close']])[-projection_WrappedBitcoin:]
+print(x_projection_WrappedBitcoin)
+
+linReg_prediction_WrappedBitcoin = linReg_WrappedBitcoin.predict(x_projection_WrappedBitcoin)
+print(linReg_prediction_WrappedBitcoin)
+
+################################################### Bitcoin #############################################################
+
+x_projection_Bitcoin = np.array(Bitcoin[['Close']])[-projection_Bitcoin:]
+print(x_projection_Bitcoin)
+
+linReg_prediction_Bitcoin = linReg_Bitcoin.predict(x_projection_Bitcoin)
+print(linReg_prediction_Bitcoin)

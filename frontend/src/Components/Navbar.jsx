@@ -6,12 +6,6 @@ export default function Navbar({ user }) {
   const { isLoggedIn, LogoutUser } = useAuth();
   const navigate = useNavigate();
 
-  const data = localStorage.getItem("USER");
-  const userData = JSON.parse(data);
-
-  useEffect(() => {
-    console.log(userData);
-  }, []);
 
   return (
     <>

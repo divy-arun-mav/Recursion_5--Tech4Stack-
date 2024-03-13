@@ -1,6 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useAuth } from './store/auth'
 
 const Login = () => {
+    const {connectWallet} = useAuth();
+    useEffect(()=>{
+        connectWallet();
+    },[])
     return (
         <>
             <div className="container col-3 p-3" style={{ marginTop: "12%", border: "0px solid grey", borderRadius: "20px", boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)" }}>

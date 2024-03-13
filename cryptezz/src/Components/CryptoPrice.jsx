@@ -2,9 +2,9 @@ import React, { useCallback, useEffect, useState } from 'react';
 
 const CryptoPrice = () => {
 
-    const [coin, setCoin] = useState('');
+    const [price, setPrice] = useState(null);
 
-    const getCoinList = useCallback(async () => {
+    const getCoinList = useCallback(async (coin) => {
         const url = `https://api.coingecko.com/api/v3/coins/${coin}`;
         const apiKey = 'CG-FNFFa7JE39x9DRveFTroVzaa'; // Replace with your actual API key
 
@@ -20,23 +20,27 @@ const CryptoPrice = () => {
                 console.error(`Error fetching data: ${response.status}`);
             }
             const data = await response.json();
-            console.log(data.market_data.ath.inr); // Access the parsed JSON response data
+            console.log(data.market_data.ath.inr);
+            setPrice(data.market_data.ath.inr);
         } catch (error) {
             console.error(error);
         }
     }, []);
 
-    useEffect(() => {
-        getCoinList();
-    }, [getCoinList]);
+    // useEffect(() => {
+    //     getCoinList();
+    // }, [getCoinList]);
 
     return (
         <>
-            <div className="container-crypt">
-                
+            <div className="container">
+                <p>{price}</p>
+                <button onClick={() => { getCoinList("bitcoin") }}>Bitcoin Price</button>
             </div>
             <style>{`
-        /* Your CSS styles here */
+        .container{
+            margin-top:200px;
+        }
       `}</style>
         </>
     );

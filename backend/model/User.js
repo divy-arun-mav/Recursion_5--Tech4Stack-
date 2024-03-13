@@ -18,6 +18,12 @@ const userSchema = new Schema({
     },
     ntoken: {
         type: String
+    },
+    tokenName:{
+        type: String
+    },
+    thresholdValue:{
+        type:Number
     }
 });
 

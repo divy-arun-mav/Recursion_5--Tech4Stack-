@@ -36,7 +36,7 @@ router.post('/login', async (req, res) => {
                 message: "Login successful",
                 token,
             });
-            
+
         } else {
             return res.status(404).json({ error: "Invalid Credentials!!!" });
         }
@@ -47,7 +47,30 @@ router.post('/login', async (req, res) => {
 });
 
 
-// ... (other imports)
+router.post('/setToken/:mail', async (req, res) => {
+    const { tokenName, thresholdValue } = req.body;
+    const { email } = req.params;
+
+    if (!tokenName) {
+        return res.status(422).json({ error: "Please Provide tokenName" });
+    }
+
+    try {
+        const user = await User.findOne({ email });
+
+        if (!user) {
+            return res.status(422).json({ error: "Invalid User" });
+        }
+        user.thresholdValue = thresholdValue;
+        user.tokenName = tokenName;
+        await user.save();
+        return res.status(200).json({ success: true });
+    } catch (err) {
+        console.log(err);
+        return res.status(500).json({ error: "Internal server error" });
+    }
+});
+
 
 router.post('/register', async (req, res) => {
     const { username, email, password } = req.body;

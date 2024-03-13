@@ -16,12 +16,10 @@ const Login = () => {
                         <label class="form-label" for="form2Example1">Email address</label>
                         <input type="email" id="form2Example1" class="form-control" />
                     </div>
-
                     <div class="form-outline mb-4">
                         <label class="form-label" for="form2Example2">Password</label>
                         <input type="password" id="form2Example2" class="form-control" />
                     </div>
-
                     <div class="row mb-4">
                         <div class="col d-flex justify-content-center">
                             <div class="form-check">

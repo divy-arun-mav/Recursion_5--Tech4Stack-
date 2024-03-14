@@ -35,7 +35,7 @@ Start using **Xchange** today to take control of your currency exchange monitori
 At **Xchange**, our development team, **Tech4Stack**, embodies a passion for innovation and excellence. Comprised of skilled individuals including Vipul Mhatre, Divy Mav, Ashish Maurya, and Kaushal Jha, our team is driven by a shared commitment to crafting cutting-edge solutions for navigating the dynamic landscapes of currency exchange and crypto markets. With a blend of expertise in software development, data analysis, and market research, **Tech4Stack** is dedicated to delivering robust, user-centric tools that empower individuals and businesses to make informed decisions. We pride ourselves on our attention to detail, ensuring that every feature we develop is accurate, timely, and actionable.
 
 **Team Members:-**
-#Divy Arun Mav
-#Vipul Rajesh Mhatre
-#Ashish Vinod Maurya
-#Kaushal Shambhusharan Jha
+**Divy Arun Mav**
+**Vipul Rajesh Mhatre**
+**Ashish Vinod Maurya**
+**Kaushal Shambhusharan Jha**

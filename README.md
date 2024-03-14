@@ -2,6 +2,8 @@
 
 **Xchange** is your ultimate tool for monitoring currency exchange rates and staying ahead of market fluctuations. With our intuitive interface and powerful features, you can effortlessly track exchange rates and receive alerts whenever they hit your predefined thresholds. Additionally, **Xchange** offers insights into the crypto market trends, empowering you with valuable information for making informed investment decisions.
 
+<img src="Xchange.mp4">
+
 ## Features:
 
 **Currency Exchange Monitoring:**
@@ -18,6 +20,8 @@
 
 - Utilizes historical data and current market indicators.
 - Predicts future movements and provides investment recommendations.
+
+<img src="Xchangehomepage.png">
 
 ## How Xchange Works:
 

@@ -5,6 +5,7 @@ import Navbar from './Components/Navbar';
 import Home from './Components/Home';
 import Login from './Components/Login';
 import Register from './Components/Register';
+import BitcoinChart from './Components/BitcoinChart';
 
 function App() {
   const [showChat, setShowChat] = useState(false);
@@ -20,6 +21,7 @@ function App() {
         <Route exact path='/' element={<Home />} />
         <Route exact path='/login' element={<Login />} />
         <Route exact path='/register' element={<Register />} />
+        <Route exact path='/chart' element={<BitcoinChart />} />
         <Route exact path='/cryptoprice' element={<CryptoPrice />} />
       </Routes>
       <div

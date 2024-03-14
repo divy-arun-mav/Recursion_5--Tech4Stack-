@@ -48,11 +48,11 @@ const Login = () => {
             });
 
             if (response.status === 200) {
+                // connectWallet();
                 const res_data = await response.json();
                 storeTokenInLS(res_data.token);
                 localStorage.setItem("USER", JSON.stringify(res_data.user));
                 window.alert("Login Successful");
-                connectWallet();
                 navigate('/');
             } else {
                 return alert("Invalid Credentials!!!");

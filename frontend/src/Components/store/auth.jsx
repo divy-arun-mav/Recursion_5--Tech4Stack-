@@ -8,6 +8,7 @@ export const AuthProvider = ({ children }) => {
     const [token,setToken] = useState('');
     const [user,setUser] = useState('');
     let isLoggedIn = !!token;
+    console.log("ISLOG: ",isLoggedIn);
 
     const connectWallet = async () => {
         try {
@@ -24,6 +25,7 @@ export const AuthProvider = ({ children }) => {
                     window.location.reload();
                 });
                 setAddress(account[0]);
+                localStorage.setItem("address", account);
             }
             else {
                 alert('Please install and log in to Metamask wallet to initiate the transaction.');
@@ -54,6 +56,7 @@ export const AuthProvider = ({ children }) => {
         setToken("");
         localStorage.removeItem("token");
         localStorage.removeItem("USER");
+        localStorage.removeItem("address");
     }
 
     const userAuthentication = async () => {
@@ -90,6 +93,7 @@ export const AuthProvider = ({ children }) => {
             }
         };
         authenticateUser();
+        connectWallet();
     }, [token, userAuthentication]);
 
 

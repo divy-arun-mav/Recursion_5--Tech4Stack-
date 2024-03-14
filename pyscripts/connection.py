@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, send_file
+from flask import Flask, jsonify
 import pandas as pd
 import numpy as np
 from sklearn.linear_model import LinearRegression
@@ -9,9 +9,7 @@ import os
 app = Flask(__name__)
 
 # Constants for projection lengths
-projection_Monero = 30
-projection_Ethereum = 30
-projection_Bitcoin = 30
+PROJECTION_LENGTH = 30
 
 # Function to load models
 def load_model(coin):
@@ -25,31 +23,29 @@ def load_model(coin):
 # Load the trained models
 linReg_Monero = load_model('Monero')
 linReg_Ethereum = load_model('Ethereum')
-linReg_WrappedBitcoin = load_model('WrappedBitcoin')
 linReg_Bitcoin = load_model('Bitcoin')
 
 @app.route('/visualize/<coin>')
 def visualize(coin):
     return f"Visualizing {coin}"
 
-@app.route('/train/<coin>')
+@app.route('/train/<coin>', methods=['POST'])
 def train(coin):
-    if coin == 'Monero':
-        df = pd.read_csv('coin_Monero.csv')
-    elif coin == 'Ethereum':
-        df = pd.read_csv('coin_Ethereum.csv')
-    elif coin == 'Bitcoin':
-        df = pd.read_csv('coin_Bitcoin.csv')
-    else:
-        return "Invalid coin type"
+    if coin not in {'Monero', 'Ethereum', 'Bitcoin'}:
+        return "Invalid coin type", 400  # Return 400 Bad Request
+
+    try:
+        df = pd.read_csv(f'coin_{coin}.csv')
+    except FileNotFoundError:
+        return f"CSV file not found for {coin}", 404  # Return 404 Not Found
 
     # Creation of the independent data set (X) and dependent data set (y)
     X = np.array(df[['Close']])
     y = df['Prediction'].values
 
-    # Remove last 'projection' elements for training
-    X_train = X[:-globals()['projection_' + coin]]
-    y_train = y[:-globals()['projection_' + coin]]
+    # Remove last 'PROJECTION_LENGTH' elements for training
+    X_train = X[:-PROJECTION_LENGTH]
+    y_train = y[:-PROJECTION_LENGTH]
 
     x_train, x_test, y_train, y_test = train_test_split(X_train, y_train, test_size=0.15)
 
@@ -62,29 +58,28 @@ def train(coin):
         pickle.dump(linReg, file)
 
     linReg_confidence = linReg.score(x_test, y_test)
-    print("Linear Regression Confidence for " + coin + ": ", linReg_confidence)
-    print(linReg_confidence * 100, '%')
+    print(f"Linear Regression Confidence for {coin}: {linReg_confidence * 100}%")
 
-    return "Model trained and saved for " + coin
+    return f"Model trained and saved for {coin}", 200  # Return 200 OK
 
-@app.route('/predict/<coin>')
+@app.route('/predict/<coin>', methods=['GET'])
 def predict(coin):
-    if coin == 'Monero':
-        df = pd.read_csv('coin_Monero.csv')
-    elif coin == 'Ethereum':
-        df = pd.read_csv('coin_Ethereum.csv')
-    elif coin == 'Bitcoin':
-        df = pd.read_csv('coin_Bitcoin.csv')
-    else:
-        return "Invalid coin type"
+    if coin not in {'Monero', 'Ethereum', 'Bitcoin'}:
+        return "Invalid coin type", 400  # Return 400 Bad Request
 
-    x_projection = np.array(df[['Close']])[-globals()['projection_' + coin]:]
+    try:
+        df = pd.read_csv(f'coin_{coin}.csv')
+    except FileNotFoundError:
+        return f"CSV file not found for {coin}", 404  # Return 404 Not Found
+
+    x_projection = np.array(df[['Close']])[-PROJECTION_LENGTH:]
     linReg = load_model(coin)
+    
     if linReg:
         linReg_prediction = linReg.predict(x_projection)
-        return str(linReg_prediction[0])
+        return str(linReg_prediction[0]), 200  # Return 200 OK
     else:
-        return "Model not found for " + coin
+        return f"Model not found for {coin}", 404  # Return 404 Not Found
 
 if __name__ == '__main__':
     app.run(debug=True)

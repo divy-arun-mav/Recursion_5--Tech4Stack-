@@ -5,11 +5,6 @@
         "img": "https://cryptologos.cc/logos/tether-usdt-logo.png"
     },
     {
-        "id": "eth",
-        "name": "Etherum",
-        "img": "https://upload.wikimedia.org/wikipedia/commons/0/05/Ethereum_logo_2014.svg"
-    },
-    {
         "id": "usd-coin",
         "name": "USDC",
         "img": "https://assets.coingecko.com/coins/images/6319/standard/usdc.png?1696506694"
@@ -18,11 +13,6 @@
         "id": "fetch-ai",
         "name": "Fetch.ai",
         "img": "https://assets.coingecko.com/coins/images/5681/standard/Fetch.jpg?1696506140"
-    },
-    {
-        "id": "cosmos-hub",
-        "name": "Cosmos Hub",
-        "img": "https://assets.coingecko.com/coins/images/1481/standard/cosmos_hub.png?1696502525"
     },
     {
         "id": "tron",

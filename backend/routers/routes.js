@@ -49,14 +49,14 @@ router.post('/login', async (req, res) => {
 
 router.post('/setToken/:mail', async (req, res) => {
     const { tokenName, thresholdValue } = req.body;
-    const { email } = req.params;
+    const { mail } = req.params;
 
     if (!tokenName) {
         return res.status(422).json({ error: "Please Provide tokenName" });
     }
 
     try {
-        const user = await User.findOne({ email });
+        const user = await User.findOne({ email:mail });
 
         if (!user) {
             return res.status(422).json({ error: "Invalid User" });

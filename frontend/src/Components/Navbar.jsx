@@ -30,6 +30,7 @@ export default function Navbar() {
               <form className="d-flex fs-6 fw-medium ms-auto navbar-nav">
                 {isLoggedIn ? <>
                   <> <button className="btn btn-outline-success ms-2 fw-semibold" type="submit" onClick={LogoutUser} style={{ maxHeight: "min-content" }} >{address.slice(0, 4) + "..." + address.slice(38)}</button>
+                    {/* <> <button className="btn btn-outline-success ms-2 fw-semibold" type="submit" onClick={LogoutUser} style={{ maxHeight: "min-content" }} >{address}</button> */}
 
                   </>
                 </> :

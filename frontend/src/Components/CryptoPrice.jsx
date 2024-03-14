@@ -1,12 +1,40 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { Chart } from 'react-google-charts';
 import Coins from './store/tokenList.json';
+import { useAuth } from './store/auth';
 
 const CryptoPrice = () => {
+    const { user } = useAuth();
     const [coinData, setCoinData] = useState([]);
     const [selectedCoin, setSelectedCoin] = useState(null);
     const [price, setPrice] = useState('');
     const [currentPrice, setCurrentPrice] = useState(null);
+
+    const setToken = async () => {
+        console.log(selectedCoin.id, price, user.email);
+        try {
+            const response = await fetch(`http://localhost:8000/setToken/${user.email}`, {
+                method: 'POST',
+                headers: {
+                    "Content-type": "application/json"
+                },
+                body: JSON.stringify({
+                    tokenName: selectedCoin.id,
+                    thresholdValue: price
+                }),
+            });
+            if (response.status === 200) {
+                const res_data = await response.json();
+                console.log(res_data);
+                alert("StopLoss value set");
+            } else {
+                alert("Error setting stoploss");
+            }
+        } catch (error) {
+            console.error("Error setting stoploss:", error);
+            alert("Error setting stoploss");
+        }
+    };
 
     const getCoinList = useCallback(async (coin) => {
         const url = `https://api.coingecko.com/api/v3/coins/${coin.id}`;
@@ -64,7 +92,7 @@ const CryptoPrice = () => {
 
     useEffect(() => {
         fetchCoinData();
-    }, ['https://api.coingecko.com/api/v3/coins']);
+    }, []);
 
     const chartData = [
         ['Time', `${selectedCoin?.name} Price (USD)`],
@@ -92,10 +120,20 @@ const CryptoPrice = () => {
                     </div>
                     {selectedCoin && (
                         <>
-                            <label htmlFor="input">Enter your token price: </label>
-                            <input type="text" name="" id="input" value={price} onChange={(e) => setPrice(e.target.value)} />
-                            <label htmlFor="input">Current token price</label>
-                            <p>{selectedCoin.priceInr !== null ? selectedCoin.priceInr : 'Select a coin to see the current price.'}</p>
+                            <label htmlFor="input" style={{ marginTop: "10px" }}>Enter your token price: </label>
+                            <input style={{ marginLeft: "50px" }} type="text" name="" id="input" value={price} onChange={(e) => setPrice(e.target.value)} />
+                            <br />
+                            <div className='d-flex' style={{ alignItems: "center" }}>
+                                <label htmlFor="input" style={{ marginTop: "10px" }}>Current token price:</label>
+                                <p style={{ marginLeft: "70px" }}>{selectedCoin.priceInr !== null ? selectedCoin.priceInr : 'Select a coin to see the current price.'}</p>
+                                <button type="button" class="btn btn-primary"
+                                    style={{
+                                        marginLeft: "50px"
+                                    }}
+                                    onClick={() => {
+                                        setToken()
+                                    }}>set stoploss</button>
+                            </div>
                         </>
                     )}
                 </form>

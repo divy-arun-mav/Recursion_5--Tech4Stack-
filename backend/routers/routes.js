@@ -47,7 +47,7 @@ router.post('/login', async (req, res) => {
 });
 
 
-router.post('/setToken/:mail', async (req, res) => {
+router.put('/setToken/:mail', async (req, res) => {
     const { tokenName, thresholdValue } = req.body;
     const { mail } = req.params;
 

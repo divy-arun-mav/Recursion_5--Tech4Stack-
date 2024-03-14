@@ -1,9 +1,11 @@
 import React, { useCallback, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Chart } from 'react-google-charts';
 import Coins from './store/tokenList.json';
 import { useAuth } from './store/auth';
 
 const CryptoPrice = () => {
+    const navigate = useNavigate();
     const { user } = useAuth();
     const [coinData, setCoinData] = useState([]);
     const [selectedCoin, setSelectedCoin] = useState(null);
@@ -53,6 +55,7 @@ const CryptoPrice = () => {
                 return null;
             }
             const data = await response.json();
+            console.log(coin.id);
             return {
                 id: coin.id,
                 name: data.name,
@@ -88,6 +91,7 @@ const CryptoPrice = () => {
 
     const handleCoinClick = (coin) => {
         setSelectedCoin(coin);
+        navigate(`/chart/${coin.id}`);
     };
 
     useEffect(() => {

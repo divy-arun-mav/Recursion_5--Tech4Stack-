@@ -4,6 +4,8 @@ import { useAuth } from './store/auth';
 
 export default function Navbar() {
   const { isLoggedIn, LogoutUser,address } = useAuth();
+  const ans = localStorage.getItem("token");
+  // const address = localStorage.getItem("add");
   const navigate = useNavigate();
   const handleClick = (e) => {
     e.preventDefault();
@@ -28,8 +30,9 @@ export default function Navbar() {
                 </li>
               </ul>
               <form className="d-flex fs-6 fw-medium ms-auto navbar-nav">
-                {isLoggedIn ? <>
-                  <> <button className="btn btn-outline-success ms-2 fw-semibold" type="submit" onClick={LogoutUser} style={{ maxHeight: "min-content" }} >{address.slice(0, 4) + "..." + address.slice(38)}</button>
+                {ans ? <>
+                  {/* <> <button className="btn btn-outline-success ms-2 fw-semibold" type="submit" onClick={LogoutUser} style={{ maxHeight: "min-content" }} >{address.slice(0, 4) + "..." + address.slice(38)}</button> */}
+                  <> <button className="btn btn-outline-success ms-2 fw-semibold" type="submit" onClick={LogoutUser} style={{ maxHeight: "min-content" }} >{address ? address.slice(0, 4) + "..." + address.slice(38) : ""}</button>
 
                   </>
                 </> :

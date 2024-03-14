@@ -115,6 +115,22 @@ router.post('/register', async (req, res) => {
     }
 });
 
+router.get('/coin/:coin', async (req, res) => {
+    const {coin} = req.params; 
+    try {
+      const currencyCode = 'usd';
+      const days = 1;
+      const apiUrl = `https://api.coingecko.com/api/v3/coins/${coin}/market_chart?vs_currency=${currencyCode}&days=${days}`;
+      const response = await fetch(apiUrl);
+      const data = await response.json();
+  
+      res.json({ prices: data.prices });
+    } catch (error) {
+      console.error('Error fetching Bitcoin data:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  });
+
 
 
 router.get('/user', authMiddleware, (req, res) => {

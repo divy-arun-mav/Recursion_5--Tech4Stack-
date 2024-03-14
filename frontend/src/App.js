@@ -26,10 +26,13 @@ function App() {
       </Routes>
       <div
         style={{
-          position: 'absolute',
+          position: 'fixed',
           bottom: 0,
           right: 0,
           zIndex: 102,
+          top: "20px",
+          right: "100px",
+          border: "1px solid white"
         }}
       >
         <button className='chtbt' onClick={toggleChat}>
@@ -47,8 +50,13 @@ function App() {
         {`
         .chtbt {
           position: fixed;
-          bottom: 0;
-          right: 0;
+          bottom: 20px;
+          border:none;
+          color:white;
+          right: 20px;
+          border-radius:10px;
+          padding: 10px 20px;
+          background-color: #0d6efd;
         }
 
         .chtbt:hover + iframe {
@@ -57,6 +65,11 @@ function App() {
 
         iframe {
           display: none;
+          padding:10px;
+          width:350px;
+          border:1px solid white;
+          border-radius:20px;
+          background-color: #0d6efd;
         }
         `}
       </style>

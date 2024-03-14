@@ -28,6 +28,9 @@ export default function Navbar() {
                 <li className="nav-item">
                   <Link className="nav-link active" aria-current="page" to='/'>Home</Link>
                 </li>
+                <li className="nav-item">
+                  <Link className="nav-link active" aria-current="page" to='/cryptoprice'>Rates</Link>
+                </li>
               </ul>
               <form className="d-flex fs-6 fw-medium ms-auto navbar-nav">
                 {ans ? <>
